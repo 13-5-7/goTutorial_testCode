@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .code-font { font-family: 'JetBrains Mono', monospace; }
+    </style>
+    <title>Edit: {{.Title}}</title>
+</head>
+<body class="bg-[#0f172a] text-slate-200 antialiased min-h-screen">
+    <div class="max-w-5xl mx-auto pt-12 px-6">
+        <form action="/save/{{.Title}}" method="POST" class="space-y-6">
+            <div class="flex items-center justify-between">
+                <div class="space-y-1">
+                    <h1 class="text-sm font-bold tracking-[0.2em] text-indigo-400 uppercase">Document Editor</h1>
+                    <p class="text-2xl font-semibold text-white">Editing: {{.Title}}</p>
+                </div>
+                <div class="flex gap-3">
+                    <a href="/view/{{.Title}}" class="px-5 py-2 text-sm font-medium text-slate-400 hover:bg-slate-800 rounded-lg transition">Cancel</a>
+                    <button type="submit" class="px-8 py-2 bg-indigo-600 text-white text-sm font-bold rounded-lg shadow-lg shadow-indigo-500/20 hover:bg-indigo-500 hover:-translate-y-0.5 active:translate-y-0 transition-all">
+                        SAVE CHANGES
+                    </button>
+                </div>
+            </div>
+
+            <div class="relative group">
+                <div class="absolute -inset-1 bg-gradient-to-r from-indigo-500 to-cyan-500 rounded-2xl blur opacity-10 group-focus-within:opacity-25 transition"></div>
+                <textarea name="body" spellcheck="false"
+                    class="relative w-full h-[60vh] bg-[#1e293b] border border-slate-700 rounded-xl p-8 code-font text-indigo-100 leading-relaxed focus:outline-none focus:border-indigo-500 transition-all resize-none shadow-inner"
+                    placeholder="Enter your markdown here...">{{printf "%s" .Body}}</textarea>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
